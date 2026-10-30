@@ -51,3 +51,9 @@ variable "ssh_description" {
   type    = string
   default = "SSH restreint"
 }
+
+variable "enable_monitoring_port" {
+  description = "Autorise le port node exporter 9100 depuis le CIDR administrateur"
+  type        = bool
+  default     = false
+}

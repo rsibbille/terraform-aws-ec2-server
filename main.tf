@@ -5,6 +5,18 @@ resource "aws_security_group" "this" {
     "Regles du serveur ${var.name}"
   )
 
+  dynamic "ingress" {
+    for_each = var.enable_monitoring_port ? [1] : []
+
+    content {
+      description = "Node Exporter"
+      from_port   = 9100
+      to_port     = 9100
+      protocol    = "tcp"
+      cidr_blocks = [var.admin_cidr]
+    }
+  }
+
   ingress {
     description = var.ssh_description
     from_port   = 22
